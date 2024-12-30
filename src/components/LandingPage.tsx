@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import { Github, ArrowRight } from 'lucide-react';
 
+// Define the type for the component's props
 type LandingPageProps = {
   onSubmit: (username: string) => void;
 };
 
+// Define the LandingPage component
 export function LandingPage({ onSubmit }: LandingPageProps) {
+  // State to store the username input
   const [username, setUsername] = useState('');
+  // State to manage the loading state
   const [isLoading, setIsLoading] = useState(false);
 
+  // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!username.trim()) return;
@@ -21,6 +26,7 @@ export function LandingPage({ onSubmit }: LandingPageProps) {
     }, 800);
   };
 
+  // Handle default username submission
   const handleDefaultSubmit = () => {
     setIsLoading(true);
     // Simulate loading for smooth transition
@@ -33,6 +39,7 @@ export function LandingPage({ onSubmit }: LandingPageProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
       <div className="max-w-md w-full">
+        {/* Header */}
         <div className="text-center mb-8 animate-fade-in">
           <Github className="w-16 h-16 text-white mx-auto mb-4" />
           <h1 className="text-4xl font-bold text-white mb-2">
@@ -43,6 +50,7 @@ export function LandingPage({ onSubmit }: LandingPageProps) {
           </p>
         </div>
 
+        {/* Form */}
         <form 
           onSubmit={handleSubmit}
           className="backdrop-blur-lg rounded-lg p-6 shadow-xl bg-white/10"
@@ -74,6 +82,7 @@ export function LandingPage({ onSubmit }: LandingPageProps) {
           </div>
         </form>
 
+        {/* Default username button */}
         <button
           onClick={handleDefaultSubmit}
           className="mt-4 w-full rounded-lg px-4 py-3 transition-all bg-gray-700 hover:bg-gray-800 text-white"

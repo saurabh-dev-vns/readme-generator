@@ -15,15 +15,22 @@ export function generateMinimalTemplate(
   customSections: CustomSection[] = [] // Provide default value
 
 ): string {
+  // Generate skill badges
   const skillBadges = skills
     .map(skill => getSkillBadge(skill))
     .filter(Boolean)
     .join(' ');
 
+  // Generate GitHub stats
   const stats = generateGitHubStats(username, selectedStats);
+  
+  // Generate social badges
   const socialBadges = generateSocialBadges(socials);
+  
+  // Generate custom sections
   const customContent = generateCustomSections(customSections);
 
+  // Return the final markdown string
   return `# Hi there 👋 I'm ${name}
 
 ${bio}

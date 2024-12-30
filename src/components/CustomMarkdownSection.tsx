@@ -1,6 +1,7 @@
 import { FileEdit, GripVertical } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid'; // Add this import
 
+// Define the type for a custom section
 export type CustomSection = {
   id: string;
   title: string;
@@ -8,36 +9,42 @@ export type CustomSection = {
   position: number;
 };
 
+// Define the props for the CustomMarkdownSection component
 type CustomMarkdownSectionProps = {
   sections: CustomSection[];
   onSectionsChange: (sections: CustomSection[]) => void;
 };
 
+// Main component to manage custom markdown sections
 export function CustomMarkdownSection({ sections, onSectionsChange }: CustomMarkdownSectionProps) {
+  // Function to add a new section
   const addSection = () => {
     const newSection: CustomSection = {
-      id: uuidv4(),
+      id: uuidv4(), // Generate a unique ID for the new section
       title: '',
       content: '',
       position: sections.length,
     };
-    onSectionsChange([...sections, newSection]);
+    onSectionsChange([...sections, newSection]); // Update the sections state with the new section
   };
 
+  // Function to update an existing section
   const updateSection = (id: string, updates: Partial<CustomSection>) => {
     onSectionsChange(
       sections.map(section => 
-        section.id === id ? { ...section, ...updates } : section
+        section.id === id ? { ...section, ...updates } : section // Update the section with the matching ID
       )
     );
   };
 
+  // Function to remove a section
   const removeSection = (id: string) => {
-    onSectionsChange(sections.filter(section => section.id !== id));
+    onSectionsChange(sections.filter(section => section.id !== id)); // Filter out the section with the matching ID
   };
 
   return (
       <div className="space-y-4">
+        {/* Header with title and add button */}
         <div className="flex flex-col sm:flex-row justify-between gap-2">
           <div className="flex items-center gap-2">
             <FileEdit className="w-5 h-5 text-white" />
@@ -51,6 +58,7 @@ export function CustomMarkdownSection({ sections, onSectionsChange }: CustomMark
           </button>
         </div>
         
+        {/* List of sections */}
         <div className="space-y-4">
           {sections.map((section, index) => (
             <Section key={section.id} section={section} index={index} updateSection={updateSection} removeSection={removeSection} />
@@ -60,6 +68,7 @@ export function CustomMarkdownSection({ sections, onSectionsChange }: CustomMark
   );
 }
 
+// Component to render an individual section
 const Section = ({ section, updateSection, removeSection }: { section: CustomSection; index: number; updateSection: (id: string, updates: Partial<CustomSection>) => void; removeSection: (id: string) => void }) => {
   return (
     <div className="bg-gray-800 p-4 rounded-lg border border-gray-600 shadow-sm">
@@ -70,7 +79,7 @@ const Section = ({ section, updateSection, removeSection }: { section: CustomSec
         <input
           type="text"
           value={section.title}
-          onChange={(e) => updateSection(section.id, { title: e.target.value })}
+          onChange={(e) => updateSection(section.id, { title: e.target.value })} // Update the section title
           placeholder="Section Title"
           className="flex-1 p-2 border outline-none rounded-md bg-gray-700 text-white border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
@@ -80,7 +89,7 @@ const Section = ({ section, updateSection, removeSection }: { section: CustomSec
       </div>
       <textarea
         value={section.content}
-        onChange={(e) => updateSection(section.id, { content: e.target.value })}
+        onChange={(e) => updateSection(section.id, { content: e.target.value })} // Update the section content
         placeholder="Enter markdown content..."
         className="w-full h-32 p-2 border outline-none rounded-md bg-gray-700 text-white border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
       />

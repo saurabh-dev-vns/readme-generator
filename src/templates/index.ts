@@ -6,6 +6,7 @@ import type { UserData } from '../components/UserForm';
 export function generateMarkdown(userData: UserData, template: string, username: string): string {
   const { name, bio, skills, projects, selectedStats, socials, customSections } = userData;
 
+  // Switch between different templates based on the provided template name
   switch (template) {
     case 'minimal':
       return generateMinimalTemplate(name, bio, skills, projects, username, selectedStats, socials, customSections);

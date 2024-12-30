@@ -14,15 +14,22 @@ export function generateDetailedTemplate(
   socials: Record<string, string>,
   customSections: CustomSection[] = [] 
 ): string {
+  // Generate skill badges
   const skillBadges = skills
     .map(skill => getSkillBadge(skill))
     .filter(Boolean)
     .join(' ');
 
+  // Generate GitHub stats
   const stats = generateGitHubStats(username, selectedStats);
+  
+  // Generate social badges
   const socialBadges = generateSocialBadges(socials);
+  
+  // Generate custom sections
   const customContent = generateCustomSections(customSections);
 
+  // Return the final markdown string
   return `# ${name}
 
 ## About Me

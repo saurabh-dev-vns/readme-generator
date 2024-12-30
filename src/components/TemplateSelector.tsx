@@ -1,11 +1,13 @@
 import { Layout } from 'lucide-react';
 
+// Define the Template type with id, name, and description properties
 type Template = {
   id: string;
   name: string;
   description: string;
 };
 
+// Array of template objects with predefined values
 const templates: Template[] = [
   {
     id: 'minimal',
@@ -24,18 +26,22 @@ const templates: Template[] = [
   }
 ];
 
+// Define the props for the TemplateSelector component
 type TemplateSelectorProps = {
   selectedTemplate: string;
   onTemplateChange: (templateId: string) => void;
 };
 
+// TemplateSelector component definition
 export function TemplateSelector({ selectedTemplate, onTemplateChange }: TemplateSelectorProps) {
   return (
     <div className="space-y-4">
+      {/* Header section with an icon and title */}
       <div className="flex items-center gap-2 text-lg font-semibold text-white">
         <Layout className="w-5 h-5 text-white" />
         <h2>Choose Template</h2>
       </div>
+      {/* Template options rendered as buttons */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         {templates.map((template) => (
           <button

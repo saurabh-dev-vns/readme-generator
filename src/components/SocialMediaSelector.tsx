@@ -1,22 +1,27 @@
 import { Share2 } from 'lucide-react';
 import { socialPlatforms } from '../data/socialPlatforms';
 
+// Define the props for the SocialMediaSelector component
 type SocialMediaSelectorProps = {
   socials: Record<string, string>;
   onSocialsChange: (socials: Record<string, string>) => void;
 };
 
+// SocialMediaSelector component
 export function SocialMediaSelector({ socials, onSocialsChange }: SocialMediaSelectorProps) {
+  // Function to handle changes in social media input fields
   const handleSocialChange = (platform: string, value: string) => {
-    onSocialsChange({ ...socials, [platform]: value });
+    onSocialsChange({ ...socials, [platform]: value }); // Update the socials state with the new value
   };
 
   return (
     <div className="space-y-4">
+      {/* Header */}
       <div className="flex items-center gap-2">
         <Share2 className="w-5 h-5 text-white" />
         <h2 className="text-lg font-semibold text-white">Social Media</h2>
       </div>
+      {/* Social media inputs */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {socialPlatforms.map((platform) => (
           <div key={platform.name} className="space-y-2">

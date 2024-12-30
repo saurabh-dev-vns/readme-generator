@@ -5,6 +5,7 @@ import { TemplateSelector } from './components/TemplateSelector';
 import { Preview } from './components/Preview';
 import { GithubIcon, Plus } from 'lucide-react';
 
+// Initial user data structure
 const initialUserData: UserData = {
   name: '',
   bio: '',
@@ -16,14 +17,19 @@ const initialUserData: UserData = {
 };
 
 export default function App() {
+  // State to store the username
   const [username, setUsername] = useState<string | null>(null);
+  // State to store the user data
   const [userData, setUserData] = useState<UserData>(initialUserData);
+  // State to store the selected template
   const [selectedTemplate, setSelectedTemplate] = useState('minimal');
 
+  // Function to handle changes in user data
   const handleUserDataChange = (data: Partial<UserData>) => {
     setUserData(prev => ({ ...prev, ...data }));
   };
 
+  // Function to initialize a new README creation
   const handleCreateNew = () => {
     setUsername(null);
     setUserData(initialUserData);
@@ -31,12 +37,14 @@ export default function App() {
     console.log('Initialized new README creation.');
   };
 
+  // If no username is set, show the landing page
   if (!username) {
     return <LandingPage onSubmit={setUsername} />;
   }
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
+      {/* Header section */}
       <header className="bg-gray-800 shadow-sm fixed w-full top-0 left-0 z-10 bg-opacity-90 backdrop-filter backdrop-blur-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -61,6 +69,7 @@ export default function App() {
         </div>
       </header>
 
+      {/* Main content section */}
       <main className="pt-44 max-w-7xl mx-auto px-4 sm:pt-28 md:pt-20 lg:pt-24 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-8">

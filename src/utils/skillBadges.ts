@@ -1,3 +1,4 @@
+// Define the BadgeConfig type
 type BadgeConfig = {
   name: string;
   color: string;
@@ -5,6 +6,7 @@ type BadgeConfig = {
   logoColor?: string;
 };
 
+// Define the BADGE_CONFIGS object containing badge configurations
 const BADGE_CONFIGS: Record<string, BadgeConfig> = {
   // Languages
   'C': { name: 'c', color: '00599C', logo: 'c', logoColor: 'white' },
@@ -39,6 +41,7 @@ const BADGE_CONFIGS: Record<string, BadgeConfig> = {
   'Vite': { name: 'vite', color: '646CFF', logo: 'vite', logoColor: 'white' },
 };
 
+// Function to get the skill badge markdown string
 export function getSkillBadge(skillName: string): string {
   const config = BADGE_CONFIGS[skillName];
   if (!config) return '';

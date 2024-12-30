@@ -13,12 +13,15 @@ type PreviewProps = {
 };
 
 export function Preview({ userData, template, username }: PreviewProps) {
+  // State to manage custom sections
   const [sections, setSections] = React.useState(userData.customSections || []);
   
+  // Update sections when userData.customSections changes
   React.useEffect(() => {
     setSections(userData.customSections || []);
   }, [userData.customSections]);
 
+  // Generate markdown using userData, template, and username
   const markdown = React.useMemo(() => {
     try {
       return generateMarkdown({ ...userData, customSections: sections }, template, username);
@@ -28,6 +31,7 @@ export function Preview({ userData, template, username }: PreviewProps) {
     }
   }, [userData, template, username, sections]);
 
+  // Function to copy markdown to clipboard
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(markdown);
@@ -36,6 +40,7 @@ export function Preview({ userData, template, username }: PreviewProps) {
     }
   };
 
+  // Function to download markdown as README.md file
   const handleDownload = () => {
     try {
       const blob = new Blob([markdown], { type: 'text/markdown' });
@@ -54,6 +59,7 @@ export function Preview({ userData, template, username }: PreviewProps) {
 
   return (
     <div className="space-y-4">
+      {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Eye className="w-5 h-5 text-white" />
@@ -70,6 +76,7 @@ export function Preview({ userData, template, username }: PreviewProps) {
           </button>
         </div>
       </div>
+      {/* Markdown preview */}
       <div className="p-6 rounded-lg border shadow-sm bg-gray-900 border-gray-700">
         <div className="prose prose-sm text-gray-100">
           <ReactMarkdown
@@ -96,6 +103,7 @@ export function Preview({ userData, template, username }: PreviewProps) {
           </ReactMarkdown>
         </div>
       </div>
+      {/* Raw markdown */}
       <div className="p-6 rounded-lg border bg-gray-800 border-gray-700">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm font-medium text-gray-400">Raw Markdown</span>

@@ -23,6 +23,7 @@ type UserFormProps = {
 export function UserForm({ userData, onUserDataChange, username }: UserFormProps) {
   return (
     <div className="space-y-6">
+      {/* Name input */}
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <User className="w-5 h-5 text-white" />
@@ -39,6 +40,7 @@ export function UserForm({ userData, onUserDataChange, username }: UserFormProps
         />
       </div>
 
+      {/* Bio input */}
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <Code2 className="w-5 h-5 text-white" />
@@ -54,22 +56,26 @@ export function UserForm({ userData, onUserDataChange, username }: UserFormProps
         />
       </div>
 
+      {/* Skills selector */}
       <SkillsSelector
         selectedSkills={userData.skills}
         onSkillsChange={(skills) => onUserDataChange({ skills })}
       />
 
+      {/* Social media selector */}
       <SocialMediaSelector
         socials={userData.socials}
         onSocialsChange={(socials) => onUserDataChange({ socials })}
       />
 
+      {/* GitHub stats selector */}
       <GitHubStats
         selectedStats={userData.selectedStats}
         onStatsChange={(selectedStats) => onUserDataChange({ selectedStats })}
         username={username}
       />
 
+      {/* Projects input */}
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <Briefcase className="w-5 h-5 text-white" />
@@ -85,6 +91,7 @@ export function UserForm({ userData, onUserDataChange, username }: UserFormProps
         />
       </div>
 
+      {/* Custom markdown sections */}
       <CustomMarkdownSection
         sections={userData.customSections}
         onSectionsChange={(customSections) => onUserDataChange({ customSections })}
