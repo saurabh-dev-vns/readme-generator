@@ -78,7 +78,7 @@ export function Preview({ userData, template, username }: PreviewProps) {
       </div>
       {/* Markdown preview */}
       <div className="p-6 rounded-lg border shadow-sm bg-gray-900 border-gray-700">
-        <div className="prose prose-sm text-gray-100">
+        <div className="prose prose-sm prose-invert text-gray-100">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
